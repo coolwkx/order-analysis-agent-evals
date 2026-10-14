@@ -1,0 +1,93 @@
+[
+  {
+    "id": "no_decline",
+    "months": {
+      "9": [
+        {"user_id": 101, "order_count": 1, "total_amount": "100.00"}
+      ],
+      "10": [
+        {"user_id": 101, "order_count": 1, "total_amount": "150.00"}
+      ]
+    },
+    "expected_rows": [
+      {
+        "user_id": 101,
+        "previous_amount": "100.00",
+        "current_amount": "150.00",
+        "change_amount": "50.00"
+      }
+    ],
+    "expected_decline_user": null
+  },
+  {
+    "id": "tied_decline",
+    "months": {
+      "9": [
+        {"user_id": 101, "order_count": 1, "total_amount": "200.00"},
+        {"user_id": 102, "order_count": 1, "total_amount": "300.00"}
+      ],
+      "10": [
+        {"user_id": 101, "order_count": 1, "total_amount": "100.00"},
+        {"user_id": 102, "order_count": 1, "total_amount": "200.00"}
+      ]
+    },
+    "expected_rows": [
+      {
+        "user_id": 101,
+        "previous_amount": "200.00",
+        "current_amount": "100.00",
+        "change_amount": "-100.00"
+      },
+      {
+        "user_id": 102,
+        "previous_amount": "300.00",
+        "current_amount": "200.00",
+        "change_amount": "-100.00"
+      }
+    ],
+    "expected_decline_user": 101
+  },
+  {
+    "id": "both_empty",
+    "months": {
+      "9": [],
+      "10": []
+    },
+    "expected_rows": [],
+    "expected_decline_user": null
+  },
+  {
+    "id": "different_user_sets",
+    "months": {
+      "9": [
+        {"user_id": 101, "order_count": 1, "total_amount": "120.00"},
+        {"user_id": 102, "order_count": 1, "total_amount": "200.00"}
+      ],
+      "10": [
+        {"user_id": 102, "order_count": 1, "total_amount": "150.00"},
+        {"user_id": 103, "order_count": 1, "total_amount": "80.00"}
+      ]
+    },
+    "expected_rows": [
+      {
+        "user_id": 101,
+        "previous_amount": "120.00",
+        "current_amount": "0.00",
+        "change_amount": "-120.00"
+      },
+      {
+        "user_id": 102,
+        "previous_amount": "200.00",
+        "current_amount": "150.00",
+        "change_amount": "-50.00"
+      },
+      {
+        "user_id": 103,
+        "previous_amount": "0.00",
+        "current_amount": "80.00",
+        "change_amount": "80.00"
+      }
+    ],
+    "expected_decline_user": 101
+  }
+]

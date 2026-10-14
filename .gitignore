@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+work/
+outputs/
+src/*_before_*.py
+.idea/
+.vscode/
